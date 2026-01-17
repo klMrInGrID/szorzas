@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szorzótábla - Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-main: 'Outfit', sans-serif;
+            /* Modern, vibráló paletta */
+            --c-1: #ff5252;
+            --c-2: #ff7043;
+            --c-3: #ffca28;
+            --c-4: #d4e157;
+            --c-5: #66bb6a;
+            --c-6: #26c6da;
+            --c-7: #42a5f5;
+            --c-8: #5c6bc0;
+            --c-9: #ab47bc;
+            --c-10: #ec407a;
+            --text-dark: #1e293b;
+        }
+
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* Fejléc */
+        .page-header {
+            text-align: center;
+            padding: 5px 0;
+            /* Reduced padding */
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            /* Reduced font size */
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #334155;
+            font-weight: 800;
+        }
+
+        /* Rács elrendezés */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 8px;
+            /* Reduced gap */
+            width: 98%;
+            /* Slightly wider */
+            height: 92%;
+            /* Slightly taller */
+            max-width: 297mm;
+            padding: 5px;
+            /* Reduced padding */
+            box-sizing: border-box;
+        }
+
+        /* Kártya stílus */
+        .card {
+            border-radius: 8px;
+            /* Slightly smaller radius */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 1.4rem;
+            /* Reduced font size */
+            font-weight: 800;
+            padding: 2px 0;
+            /* Reduced padding */
+            color: white;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            background-color: rgba(255, 255, 255, 0.9);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 2px 5px;
+            /* Reduced padding */
+            font-size: 0.85rem;
+            /* Reduced font size */
+            font-weight: 600;
+        }
+
+        .row {
+            display: grid;
+            /* Fix szélességek a szorosabb, de rendezett elrendezésért */
+            grid-template-columns: 25px 15px 25px 15px 35px;
+            justify-content: center;
+            /* Az egész blokk középre igazítása */
+            align-items: center;
+            justify-items: center;
+            /* Tartalom középre a cellán belül */
+            border-bottom: 2px dashed rgba(0, 0, 0, 0.05);
+            padding: 1px 0;
+        }
+
+
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .op {
+            color: #94a3b8;
+            font-size: 0.9em;
+            padding: 0 2px;
+        }
+
+        .num {
+            font-weight: 600;
+        }
+
+        .res {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 1.1em;
+        }
+
+        /* Színek hozzárendelése */
+        .bg-1 {
+            background-color: var(--c-1);
+            background-image: linear-gradient(135deg, var(--c-1), #ff8a80);
+        }
+
+        .bg-2 {
+            background-color: var(--c-2);
+            background-image: linear-gradient(135deg, var(--c-2), #ffab91);
+        }
+
+        .bg-3 {
+            background-color: var(--c-3);
+            background-image: linear-gradient(135deg, var(--c-3), #ffe082);
+        }
+
+        .bg-4 {
+            background-color: var(--c-4);
+            background-image: linear-gradient(135deg, var(--c-4), #e6ee9c);
+        }
+
+        .bg-5 {
+            background-color: var(--c-5);
+            background-image: linear-gradient(135deg, var(--c-5), #a5d6a7);
+        }
+
+        .bg-6 {
+            background-color: var(--c-6);
+            background-image: linear-gradient(135deg, var(--c-6), #80deea);
+        }
+
+        .bg-7 {
+            background-color: var(--c-7);
+            background-image: linear-gradient(135deg, var(--c-7), #90caf9);
+        }
+
+        .bg-8 {
+            background-color: var(--c-8);
+            background-image: linear-gradient(135deg, var(--c-8), #9fa8da);
+        }
+
+        .bg-9 {
+            background-color: var(--c-9);
+            background-image: linear-gradient(135deg, var(--c-9), #ce93d8);
+        }
+
+        .bg-10 {
+            background-color: var(--c-10);
+            background-image: linear-gradient(135deg, var(--c-10), #f48fb1);
+        }
+
+        .tint-1 {
+            background-color: #ffebee;
+        }
+
+        .tint-2 {
+            background-color: #fbe9e7;
+        }
+
+        .tint-3 {
+            background-color: #fff8e1;
+        }
+
+        .tint-4 {
+            background-color: #f9fbe7;
+        }
+
+        .tint-5 {
+            background-color: #e8f5e9;
+        }
+
+        .tint-6 {
+            background-color: #e0f7fa;
+        }
+
+        .tint-7 {
+            background-color: #e3f2fd;
+        }
+
+        .tint-8 {
+            background-color: #e8eaf6;
+        }
+
+        .tint-9 {
+            background-color: #f3e5f5;
+        }
+
+        .tint-10 {
+            background-color: #fce4ec;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .mode-btn,
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .mode-btn {
+            background-color: #f1f5f9;
+            color: #64748b;
+        }
+
+        .mode-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        .action-btn {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+                /* Minimális margó */
+            }
+
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .grid-container {
+                width: 100%;
+                height: 100vh;
+                /* Kitölti a papírt */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-header">
+        <h1>Szorzótábla Mester</h1>
+    </div>
+
+    <div class="controls no-print">
+        <button onclick="setMode('multiplication')" id="btn-mult" class="mode-btn active">✖️ Szorzás</button>
+        <button onclick="setMode('division')" id="btn-div" class="mode-btn">➗ Osztás</button>
+        <button onclick="window.print()" class="action-btn">🖨️ Nyomtatás</button>
+    </div>
+
+    <div class="grid-container">
+        <!-- A tartalmat a JS generálja -->
+    </div>
+
+    <script>
+        const container = document.querySelector('.grid-container');
+        const title = document.querySelector('h1');
+        let currentMode = 'multiplication';
+
+        function setMode(mode) {
+            currentMode = mode;
+
+            // Update buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(mode === 'multiplication' ? 'btn-mult' : 'btn-div').classList.add('active');
+
+            // Update title
+            title.textContent = mode === 'multiplication' ? 'Szorzótábla Mester' : 'Osztótábla Mester';
+            document.title = mode === 'multiplication' ? 'Szorzótábla' : 'Osztótábla';
+
+            renderTable();
+        }
+
+        function renderTable() {
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 10; i++) {
+                let rowsHtml = '';
+                for (let j = 1; j <= 10; j++) {
+                    let num1, op, num2, res;
+
+                    if (currentMode === 'multiplication') {
+                        // 5 x 1 = 5
+                        num1 = i;
+                        op = '×';
+                        num2 = j;
+                        res = i * j;
+                    } else {
+                        // 5 / 5 = 1, 10 / 5 = 2 ... (i*j) / i = j
+                        // Az oszlop száma (i) az osztó. 
+                        // A sorozat: 1*i, 2*i, 3*i...
+                        // Tehát: (j * i) / i = j
+                        num1 = j * i;
+                        op = ':'; // Vagy ➗ vagy /
+                        num2 = i;
+                        res = j;
+                    }
+
+                    rowsHtml += `
+                        <div class="row">
+                            <span class="num">${num1}</span>
+                            <span class="op">${op}</span>
+                            <span class="num">${num2}</span>
+                            <span class="op">=</span>
+                            <span class="res">${res}</span>
+                        </div>
+                    `;
+                }
+
+                const cardHtml = `
+                    <div class="card tint-${i}">
+                        <div class="card-header bg-${i}">${i}${currentMode === 'multiplication' ? 'x' : ''}</div>
+                        <div class="card-body">
+                            ${rowsHtml}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            }
+        }
+
+        // Init
+        renderTable();
+    </script>
+
+</body>
+
+</html>

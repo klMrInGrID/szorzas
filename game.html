@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Szorzótábla Mester - Játék</title>
+    <link rel="stylesheet" href="style.css"> <!-- Alap stílusok -->
+    <link rel="stylesheet" href="game.css"> <!-- Játék specifikus stílusok -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="game-container">
+        <!-- 1. Konfigurációs Képernyő -->
+        <div id="config-screen" class="screen active">
+            <header>
+                <h1>Játék <span class="accent">Beállítások</span></h1>
+                <p>Mit szeretnél gyakorolni?</p>
+            </header>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="multiplication" onclick="selectMode('multiplication')">✖️
+                    Szorzás</button>
+                <button class="mode-btn" data-mode="division" onclick="selectMode('division')">➗ Osztás</button>
+            </div>
+
+            <div class="number-selection">
+                <h3>Válassz számokat:</h3>
+                <div class="numbers-grid">
+                    <!-- JS generálja: 1-10 checkbox gombok -->
+                </div>
+                <!-- 'Mindet kijelöl' eltávolítva -->
+            </div>
+
+            <button class="btn-primary btn-large btn-pulse" onclick="startGame()">🚀 Indítás</button>
+            <button class="btn-secondary btn-large" onclick="practiceAll()">🎲 Gyakorlás
+                mindennel</button>
+            <a href="index.html" class="btn-back">Vissza a főoldalra</a>
+        </div>
+
+        <!-- 2. Játék Képernyő -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="stats">
+                    <span id="score-display">Pont: 0</span>
+                    <button class="btn-small" onclick="quitGame()">Kilépés</button>
+                </div>
+            </div>
+
+            <div class="question-container glass">
+                <div class="question" id="question-text">
+                    <!-- Pl: 6 × 7 = ? -->
+                </div>
+            </div>
+
+            <div class="answers-grid" id="answers-container">
+                <!-- 4 válasz gomb -->
+            </div>
+        </div>
+
+        <!-- 3. Eredmény Képernyő -->
+        <div id="result-screen" class="screen">
+            <div class="result-card glass">
+                <h2>Játék Vége! 🏆</h2>
+                <div class="final-score" id="final-score">Pontszám: 10 / 10</div>
+                <p id="feedback-text">Fantasztikus vagy!</p>
+
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="restartGame()">Újra játszom</button>
+                    <button class="btn-secondary" onclick="showConfig()">Menü</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
