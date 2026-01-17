@@ -24,6 +24,17 @@
 }
 
 /* --- Config Screen --- */
+#config-screen h1 {
+    font-size: 2.8rem;
+    /* Smaller than base h1 (3.5rem) to fit "Teszteld a tudásod!" */
+}
+
+@media (max-width: 400px) {
+    #config-screen h1 {
+        font-size: 2.2rem;
+    }
+}
+
 .mode-selector {
     display: flex;
     gap: 1rem;
